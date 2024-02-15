@@ -23,8 +23,7 @@ class UserFixtures extends Fixture
             $user = new User();
             $user->setUsername('User '.$i);
             $user->setEmail('myEmail'.$i.'@website.com');
-            $role = random_int(0, 10) < 2 ? 'ROLE_ADMIN' : 'ROLE_USER';
-            $user->setRoles([$role]);
+            random_int(0, 10) < 2 ? $user->setRoles(['ROLE_ADMIN']) : '';
             $plaintextPassword = 'FnuyAssword'.$i;
 
             $hashedPassword = $this->hasher->hashPassword(

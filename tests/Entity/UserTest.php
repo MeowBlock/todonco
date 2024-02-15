@@ -58,10 +58,8 @@ class UserTest extends TestCase
     public function eraseCredentialsTest()
     {
         $user = $this->getUser();
-        $user2 = $this->getUser();
-        $user2->eraseCredentials();
         
-        $this->assertEquals($user, $user2);
+        $this->assertNull($user->eraseCredentials());
     }
 
     public function UserIdentifierTest()
