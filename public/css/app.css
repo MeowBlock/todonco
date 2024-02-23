@@ -1,0 +1,51 @@
+.imageTitleContainer{
+    display: flex;
+    flex-direction: row-reverse;
+    column-gap: 20px;
+}
+
+.slide-image {
+    height: 200px;
+    width: auto;
+}
+
+.btn_accueil {
+    width: 33%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.btn_accueil_container {
+    column-gap: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formContainer form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* label//input couple */
+.formContainer form>div>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

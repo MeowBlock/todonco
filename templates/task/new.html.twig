@@ -3,9 +3,12 @@
 {% block title %}New Task{% endblock %}
 
 {% block body %}
-    <h1>Create new Task</h1>
+    <div class="formContainer">
+        <h1>Create new Task</h1>
+        {{ include('task/_form.html.twig') }}
 
-    {{ include('task/_form.html.twig') }}
+        <a href="{{ path('task_list') }}">back to list</a>
 
-    <a href="{{ path('task_list') }}">back to list</a>
+    </div>
+
 {% endblock %}
