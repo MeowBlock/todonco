@@ -35,7 +35,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_list');
         }
 
         return $this->render('user/new.html.twig', [
@@ -63,7 +63,7 @@ class UserController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_list');
         }
 
         return $this->render('user/edit.html.twig', [
@@ -72,7 +72,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'user_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
@@ -80,6 +80,6 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('user_list');
     }
 }

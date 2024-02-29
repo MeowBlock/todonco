@@ -36,7 +36,7 @@ class TaskController extends AbstractController
             $entityManager->persist($task);
             $entityManager->flush();
 
-            return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('task_list');
         }
 
         return $this->render('task/new.html.twig', [
@@ -45,13 +45,13 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'task_show', methods: ['GET'])]
-    public function show(Task $task): Response
-    {
-        return $this->render('task/show.html.twig', [
-            'task' => $task,
-        ]);
-    }
+    // #[Route('/{id}', name: 'task_show', methods: ['GET'])]
+    // public function show(Task $task): Response
+    // {
+    //     return $this->render('task/show.html.twig', [
+    //         'task' => $task,
+    //     ]);
+    // }
 
     #[Route('/{id}/edit', name: 'task_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Task $task, EntityManagerInterface $entityManager): Response
@@ -62,7 +62,7 @@ class TaskController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('task_list');
         }
 
         return $this->render('task/edit.html.twig', [
@@ -79,6 +79,6 @@ class TaskController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('task_list');
     }
 }
