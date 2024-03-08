@@ -41,7 +41,7 @@
               <div class="content">
                 <h4>{{ task.title }}</h4>
                 <p>Purus semper eget duis at tellus at urna condimentum mattis. Non blandit massa enim nec. Integer enim neque volutpat ac tincidunt vitae semper quis.</p>
-                <span class="button is-link modal-button">Modal card</span>
+                <span class="button is-link modal-button">Voir</span>
               </div>
             </div>
           </div>
@@ -77,6 +77,9 @@
               <br>
               <time>{{ task.createdAt|date('Y-m-d') }}</time>
             </div>
+            {% if app.user %}
+            <a href="{{ path('task_edit', {'id': task.id}) }}"><span class="button is-link ">Editer</span></a>
+            {% endif %}
           </div>
         </div>
         <!-- end content -->

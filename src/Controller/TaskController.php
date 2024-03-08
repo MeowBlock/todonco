@@ -6,10 +6,11 @@ use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 #[Route('/task')]
 class TaskController extends AbstractController
@@ -56,6 +57,11 @@ class TaskController extends AbstractController
     #[Route('/{id}/edit', name: 'task_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Task $task, EntityManagerInterface $entityManager): Response
     {
+        if(!in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
+            throw new BadRequestHttpException('Seuls les administrateurs peuvent modifier une tache sans propriétaire', null, 418);
+            //return $this->redirectToRoute('task_list', [RESPONSE::HTTP_FORBIDDEN]);
+
+        }
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 

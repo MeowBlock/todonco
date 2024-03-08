@@ -38,6 +38,7 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         # - { path: ^/task/create, roles: ROLE_USER }
          - { route: task_create, roles: ROLE_USER }
+         - { route: task_edit, roles: ROLE_USER }
 
 when@test:
     security:

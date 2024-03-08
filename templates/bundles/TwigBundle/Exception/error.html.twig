@@ -1,0 +1,20 @@
+{#
+    This template is used to render any error different from 403, 404 and 500.
+
+    This is the simplest way to customize error pages in Symfony applications.
+    In case you need it, you can also hook into the internal exception handling
+    made by Symfony. This allows you to perform advanced tasks and even recover
+    your application from some errors.
+    See https://symfony.com/doc/current/controller/error_pages.html
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Erreur {{status_code}}</h1>
+<p>
+    Erreur : {{ exception.statusText }}
+</p>
+<a href="{{ path('app_default') }}">retourner a l'accueil et essayer plus tard</a>.
+
+{% endblock %}

@@ -31,6 +31,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($form->get('isAdmin')->getData()) {
+                $user->setRoles(['ROLE_ADMIN']);
+            }
             $user->setPassword($passwordHasher->hashPassword($user, $form->getData()->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
@@ -59,6 +62,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($form->getData()['isAdmin']) {
+                $user->setRoles(['ROLE_ADMIN']);
+            }
             $user->setPassword($passwordHasher->hashPassword($user, $form->getData()->getPassword()));
 
             $entityManager->flush();
