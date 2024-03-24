@@ -89,3 +89,12 @@ footer li:before {
   margin-left: -1.5em;
   color: #147efb;
 }
+
+@media screen and (min-width: 769px) 
+{
+    .modal-card, .modal-content {
+        margin: 0 auto;
+        max-height: calc(100vh - 40px);
+        width: 640px !important;
+    }
+}

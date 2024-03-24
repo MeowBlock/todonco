@@ -2,16 +2,17 @@
 
 {% block title %}Task index{% endblock %}
 
-{% block stylesheet %} 
+{% block stylesheets %}
+    {{parent()}}
+    {{ encore_entry_link_tags('tasklist') }}
+{% endblock %}
+{% block javascripts %}
+  {{parent()}}
+  {{ encore_entry_script_tags('tasklist') }}
 
 {% endblock %}
 
 {% block body %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-<link rel="stylesheet" type="text/css" href="{{asset('css/taskList.css')}}">
-<link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <style>
     .columns:nth-child(2)
     {margin-top: -10rem;}
@@ -91,5 +92,5 @@
 <script
   src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
   integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE="
-  crossorigin="anonymous"></script>    <script src="{{asset('js/taskList.js')}}"></script>
+  crossorigin="anonymous"></script>
 {% endblock %}
