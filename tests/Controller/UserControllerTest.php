@@ -29,7 +29,7 @@ class UserControllerTest extends WebTestCase
         //seulement utilisateur connecté
         $crawler = $client->request('GET', '/users/create');
         $this->assertResponseIsSuccessful();
-        $buttonCrawlerNode = $crawler->selectButton('Save');
+        $buttonCrawlerNode = $crawler->selectButton('Sauvegarder');
 
         $formValues = [
             'user[username]' => 'UsernameTest',
@@ -78,7 +78,7 @@ class UserControllerTest extends WebTestCase
         //seulement utilisateur connecté
         $crawler = $client->request('GET', '/users/'.$userId.'/edit');
         $this->assertResponseIsSuccessful();
-        $buttonCrawlerNode = $crawler->selectButton('Update');
+        $buttonCrawlerNode = $crawler->selectButton('Mettre à jour');
 
         // $rand = random_int(0, PHP_INT_MAX);
 

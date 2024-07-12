@@ -32,7 +32,7 @@ class TaskControllerTest extends WebTestCase
         //seulement utilisateur connecté
         $crawler = $client->request('GET', '/task/create');
         $this->assertResponseIsSuccessful();
-        $buttonCrawlerNode = $crawler->selectButton('Save');
+        $buttonCrawlerNode = $crawler->selectButton('Sauvegarder');
 
         $formValues = [
             'task[title]' => 'Title testCreateTask',
@@ -73,7 +73,7 @@ class TaskControllerTest extends WebTestCase
         //seulement utilisateur connecté
         $crawler = $client->request('GET', '/task/'.$taskId.'/edit');
         $this->assertResponseIsSuccessful();
-        $buttonCrawlerNode = $crawler->selectButton('Update');
+        $buttonCrawlerNode = $crawler->selectButton('Mettre à jour');
 
         $formValues = [
             'task[title]' => 'Title testEditTask',

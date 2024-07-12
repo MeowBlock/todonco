@@ -41,7 +41,11 @@
             <div class="card-content  modal-button" data-target="modal-card{{ task.id }}">
               <div class="content">
                 <h4>{{ task.title }}</h4>
-                <p>Purus semper eget duis at tellus at urna condimentum mattis. Non blandit massa enim nec. Integer enim neque volutpat ac tincidunt vitae semper quis.</p>
+                {% if task.content|length > 100 %}
+                  <p>{{ task.content|slice(0, 100) }}...</p>
+                {% else %}
+                  <p>{{ task.content }}</p>
+                {% endif %}
                 <span class="button is-link modal-button">Voir</span>
               </div>
             </div>
@@ -70,7 +74,8 @@
               <div class="media-left">
               </div>
               <div class="media-content">
-                <p class="title is-4">{{ task.author ? task.author.username : 'Anonyme' }}</p>
+                <p class="title is-4">{{ task.title }}</p>
+                <p class="subtitle is-4">{{ task.author ? task.author.username : 'Anonyme' }}</p>
               </div>
             </div>
             <div class="content">

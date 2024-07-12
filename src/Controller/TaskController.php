@@ -19,7 +19,15 @@ class TaskController extends AbstractController
     public function index(TaskRepository $taskRepository): Response
     {
         return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            'tasks' => $taskRepository->findBy([], ['isDone' => 'ASC', 'createdAt' => 'DESC']),
+        ]);
+    }
+
+    #[Route('/done', name: 'task_finished_list', methods: ['GET'])]
+    public function finished(TaskRepository $taskRepository): Response
+    {
+        return $this->render('task/index.html.twig', [
+            'tasks' => $taskRepository->findby(['isDone' => '1']),
         ]);
     }
 
@@ -57,10 +65,15 @@ class TaskController extends AbstractController
     #[Route('/{id}/edit', name: 'task_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Task $task, EntityManagerInterface $entityManager): Response
     {
-        if(!in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
+
+
+        if($task->getAuthor() != $this->getUser() && !$this->getUser()->isAdmin()){
+            throw new BadRequestHttpException('Vous n\'etes pas propriétaire de la tache', null, 418);
+            //return $this->redirectToRoute('task_list', [RESPONSE::HTTP_FORBIDDEN]);
+        }
+        if(!$this->getUser()->isAdmin() && $task->getAuthor() == NULL){
             throw new BadRequestHttpException('Seuls les administrateurs peuvent modifier une tache sans propriétaire', null, 418);
             //return $this->redirectToRoute('task_list', [RESPONSE::HTTP_FORBIDDEN]);
-
         }
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);

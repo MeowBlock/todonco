@@ -55,3 +55,8 @@
     flex-direction: row-reverse;
     column-gap: 20px;
 }
+
+.card {
+    width: 100%;
+    height: 100%;
+}
