@@ -40,6 +40,7 @@ class AccountController extends AbstractController
             'user' => $this->getUser(),
             'users' => $toset['User'],
             'tasks' => $toset['Task'],
+            'isAdmin' => $this->getUser()->isAdmin(),
             'alltasks' => $alltasks,
             'allusers' => $allusers,
         ]);

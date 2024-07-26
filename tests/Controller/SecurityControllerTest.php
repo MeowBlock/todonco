@@ -22,6 +22,24 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
     } 
+
+    public function testAccount(): void
+    {
+        $client = static::createClient();
+        
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $testUser = $userRepository->findOneBy(['email'=>'myEmail1@website.com']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $crawler = $client->request('GET', '/mon_compte');
+
+     
+        $this->assertResponseIsSuccessful();
+
+    } 
     public function testLogout(): void
     {
         $client = static::createClient();

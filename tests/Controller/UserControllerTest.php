@@ -44,7 +44,7 @@ class UserControllerTest extends WebTestCase
 
         $client->submit($form);
 
-        $this->assertResponseRedirects('/users/');
+        $this->assertResponseRedirects('/');
 
         // $formValues = [
         //     'user[username]' => 'UsernameTest',
@@ -78,14 +78,12 @@ class UserControllerTest extends WebTestCase
         //seulement utilisateur connecté
         $crawler = $client->request('GET', '/users/'.$userId.'/edit');
         $this->assertResponseIsSuccessful();
-        $buttonCrawlerNode = $crawler->selectButton('Mettre à jour');
+        $buttonCrawlerNode = $crawler->selectButton('Sauvegarder');
 
         // $rand = random_int(0, PHP_INT_MAX);
 
         $formValues = [
             'user[username]' => 'UsernameTestUPDATE',
-            'user[password][first]' => 'ligma',
-            'user[password][second]' => 'ligma',
             'user[email]' => 'TestEmail2@test.com',
         ];
 
@@ -95,7 +93,7 @@ class UserControllerTest extends WebTestCase
 
         $client->submit($form);
 
-        $this->assertResponseRedirects('/users/');
+        $this->assertResponseRedirects('/mon_compte');
 
 
     }
@@ -120,7 +118,14 @@ class UserControllerTest extends WebTestCase
 
         $crawler = $client->request('POST', '/users/'.$userId.'/delete');
 
-        $this->assertResponseRedirects('/users/');
+        $this->assertResponseRedirects('/');
+
+
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+
+
+        $em->remove($testUser);
+        $em->flush();
 
     } 
 }

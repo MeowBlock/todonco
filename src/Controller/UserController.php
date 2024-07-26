@@ -42,6 +42,9 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface  $passwordHasher): Response
     {
+        if(!$this->getUser()->isAdmin() && $user !== $this->getUser()) {
+            throw new \Exception('Vous n\'avez pas le droit de modifier cet utilisateur');
+        }
         $form = $this->createForm(UserType::class, $user);
         $form->remove('password');
         $form->handleRequest($request);

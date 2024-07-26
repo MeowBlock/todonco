@@ -83,8 +83,8 @@
               <br>
               <time>{{ task.createdAt|date('Y-m-d') }}</time>
             </div>
-            {% if app.user %}
-            <a href="{{ path('task_edit', {'id': task.id}) }}"><span class="button is-link ">Editer</span></a>
+            {% if (app.user and (task.author == app.user or app.user.isAdmin)) %}
+              <a href="{{ path('task_edit', {'id': task.id}) }}"><span class="button is-link ">Editer</span></a>
             {% endif %}
           </div>
         </div>

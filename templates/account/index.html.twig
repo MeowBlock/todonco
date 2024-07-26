@@ -91,7 +91,9 @@
                                                 <tr>
                                                     <td width="5%"><i class="fa fa-bell-o"></i></td>
                                                     <td>{{user.username}}</td>
-                                                    <td class="level-right"><a class="button is-small is-primary" href="{{path('user_edit', {id:user.id})}}">Editer</a></td>
+                                                    {% if isAdmin %}
+                                                        <td class="level-right"><a class="button is-small is-primary" href="{{path('user_edit', {id:user.id})}}">Editer</a></td>
+                                                    {% endif %}
                                                 </tr>
                                                 {% endfor %}
                                             </tbody>
@@ -123,7 +125,9 @@
                                                 <tr>
                                                     <td width="5%"><i class="fa fa-bell-o"></i></td>
                                                     <td>{{task.title}}</td>
-                                                    <td class="level-right"><a class="button is-small is-primary" href="{{path('task_edit', {id:task.id})}}">Editer</a></td>
+                                                    {% if (isAdmin or task.author == user) %}
+                                                        <td class="level-right"><a class="button is-small is-primary" href="{{path('task_edit', {id:task.id})}}">Editer</a></td>
+                                                    {% endif %}
                                                 </tr>
                                                 {% endfor %}
                                             </tbody>
